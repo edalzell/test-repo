@@ -26,7 +26,6 @@ jobs:
         uses: tubone24/update_release@v1.0
         env:
           RELEASE_ID: ${{ steps.latest_draft_release.outputs.id }}
-          TAG_NAME: ${{ github.ref }}
           GITHUB_TOKEN: ${{ github.token }}
         with:
           release_name: ${{ github.ref_name }}

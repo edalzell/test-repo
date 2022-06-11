@@ -23,7 +23,7 @@ jobs:
           ref: main
       - name: Update Release Title
         id: update_release
-        uses: tubone24/update_release@v1.0
+        uses: edalzell/update_release@debug
         env:
           RELEASE_ID: ${{ steps.latest_draft_release.outputs.id }}
           GITHUB_TOKEN: ${{ github.token }}

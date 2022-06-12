@@ -2,18 +2,13 @@ name: Release Drafter
 
 on:
   push:
-    # branches to consider in the event; optional, defaults to all
-    branches:
-      - main
-  pull_request:
-    # Only following types are handled by the action, but one can default to all as well
-    types: [opened, edited, reopened]
-
+    branches: [main]
 permissions:
   contents: read
 
 jobs:
   update_release_draft:
+    if: "${{ github.event.pull_request.merged }}"
     permissions:
       contents: write  # for release-drafter/release-drafter to create a github release
       pull-requests: write  # for release-drafter/release-drafter to add label to PR

@@ -22,9 +22,10 @@ jobs:
         with:
           script: |
             github.repos.updateRelease({
+              draft: false,
+              name: '${{ github.ref_name }}',
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: ${{ steps.latest_draft_release.outputs.id }},
-              name: ${{ github.ref_name }},
-              draft: false,
+              tag_name: '${{ github.ref_name }}'
             })

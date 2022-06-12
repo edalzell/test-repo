@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   update_release_draft:
-    if: "${{ github.event.pull_request.merged }}"
+    if: "github.event.pull_request.merged"
     permissions:
       contents: write  # for release-drafter/release-drafter to create a github release
       pull-requests: write  # for release-drafter/release-drafter to add label to PR

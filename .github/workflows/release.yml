@@ -8,7 +8,6 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
-
     steps:
       - uses: cardinalby/git-get-release-action@v1
         id: latest_draft_release
@@ -17,21 +16,15 @@ jobs:
         with:
           draft: true
           latest: true
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Update Title and Publish Release
+        id: publish_release
+        uses: actions/github-script@v6
         with:
-          ref: main
-      - name: Update Release Title
-        id: update_release
-        uses: edalzell/update_release@debug
-        env:
-          RELEASE_ID: ${{ steps.latest_draft_release.outputs.id }}
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          release_name: ${{ github.ref_name }}
-      - name: Publish Release
-        uses: eregon/publish-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.latest_draft_release.outputs.id }}
+          script: |
+            github.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: ${{ steps.latest_draft_release.outputs.id }},
+              name: ${{ github.ref_name }},
+              draft: false,
+            })

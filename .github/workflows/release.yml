@@ -21,7 +21,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            github.repos.updateRelease({
+            github.rest.repos.updateRelease({
               draft: false,
               name: '${{ github.ref_name }}',
               owner: context.repo.owner,

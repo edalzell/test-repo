@@ -9,7 +9,8 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: cardinalby/git-get-release-action@v1
+      - name: Get Draft Release
+        uses: cardinalby/git-get-release-action@v1
         id: latest_draft_release
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -29,3 +30,15 @@ jobs:
               release_id: ${{ steps.latest_draft_release.outputs.id }},
               tag_name: '${{ github.ref_name }}'
             })
+      - name: Update Changelog
+        id: update_changelog
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ github.event.release.name }}
+          release-notes: ${{ github.event.release.body }}
+      - name: Commit updated CHANGELOG
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: Update CHANGELOG
+          file_pattern: CHANGELOG.md

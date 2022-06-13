@@ -1,1 +1,3 @@
-This is a great feature
+This is a great feature.
+
+This feature got better!

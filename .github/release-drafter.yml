@@ -25,10 +25,6 @@ version-resolver:
     labels:
       - 'patch'
   default: patch
-template: |
-  ## Changes
-
-  $CHANGES
 autolabeler:
   - label: 'chore'
     branch:
@@ -39,3 +35,7 @@ autolabeler:
   - label: 'enhancement'
     branch:
       - '/feature\/.+/'
+template: |
+  ## Changes
+
+  $CHANGES

@@ -29,13 +29,3 @@ template: |
   ## Changes
 
   $CHANGES
-autolabeler:
-  - label: 'chore'
-    branch:
-      - '/docs{0,1}\/.+/'
-  - label: 'bug'
-    branch:
-      - '/fix\/.+/'
-  - label: 'enhancement'
-    branch:
-      - '/feature\/.+/'

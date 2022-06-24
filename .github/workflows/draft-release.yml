@@ -2,8 +2,7 @@ name: Release Drafter
 
 on:
   pull_request:
-    types:
-      - closed
+    types: [closed]
 permissions:
   contents: read
 

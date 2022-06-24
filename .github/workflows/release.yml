@@ -1,4 +1,4 @@
-name: "Release"
+name: Release
 
 on:
   workflow_dispatch:
@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       release_body: ${{ steps.latest_draft_release.outputs.body }}
+      release_id: ${{ steps.latest_draft_release.outputs.id }}
       release_tag: ${{ steps.latest_draft_release.outputs.tag_name }}
       release_upload_url: ${{ steps.latest_draft_release.outputs.upload_url }}
     steps:
@@ -65,3 +66,8 @@ jobs:
           branch: main
           commit_message: Update CHANGELOG
           file_pattern: CHANGELOG.md
+      - uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ needs.get_draft_release.outputs.release_id }}
